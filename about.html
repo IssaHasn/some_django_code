@@ -1,0 +1,63 @@
+{% extends 'baise.html' %}
+{% load static %}
+{% block baise %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+        <title>About</title>
+
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <link rel="stylesheet" href="{% static 'style_about.css' %}"/>
+    </head>
+    <body>
+            <div class="back_ground">
+                <h2 class="title">Hello...</h2>
+                <p class="welcom_text">IssaLib site welcomes you. We are here with our one foundation, which is the slogan "Your book is here"."</p>
+                <section class="our_books">
+                    <p class="our_books_text">We will show you our best and most requested books
+                    </p>
+                    <hr/>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <input class="search" type="search" placeholder="Find your book..."/>
+                        <input class="sup_search" type="submit" value="Search"/>
+                    </form>
+                </section>
+                <section class="outputs_books">
+                    <div class="search_box">
+                        <p class="search_box_text">You can browse here...</p>
+                        <hr/>
+                        <p class="title_type">Book type :</p>
+                        {% for t in type %}
+                        {% csrf_token %}
+                        <button class="search_type_book">{{t.type_name}}</button>
+                        {% endfor %}
+                    </div>
+                    <div class="outputs">
+                        {% for b in book %}
+                        {% csrf_token %}
+                        <div class="books_out">
+                            <p class="book_title">{{b.name}}</p>
+                            <img class="book_image" src={{b.image.url}} alt="error"/>
+                            <p class="book_price">price :{{b.price}}</p>
+                        <button class="book_add"> Add+</button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+
+
+
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+            </div>
+    </body>
+</html>
+{% endblock baise %}
